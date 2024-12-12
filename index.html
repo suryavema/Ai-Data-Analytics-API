@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CSV Analytics</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="app">
+        <!-- Auth Section -->
+        <div id="authSection" class="auth-section">
+            <div class="auth-container">
+                <div class="auth-tabs">
+                    <button class="auth-tab active" data-tab="login">Login</button>
+                    <button class="auth-tab" data-tab="register">Register</button>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <h2>Welcome Back</h2>
+                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="password" placeholder="Password" name="password" required>
+                    <button type="submit" class="btn-primary">Login</button>
+                </form>
+
+                <form id="registerForm" class="auth-form hidden">
+                    <h2>Create Account</h2>
+                    <input type="text" placeholder="Username" name="username" required>
+                    <input type="email" placeholder="Email" name="email" required>
+                    <input type="password" placeholder="Password" name="password" required>
+                    <button type="submit" class="btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <!-- Main App Section -->
+        <div id="mainSection" class="main-section hidden">
+            <nav class="navbar">
+                <div class="nav-brand">CSV Analytics</div>
+                <div class="nav-user">
+                    <span id="username"></span>
+                    <button id="logoutBtn" class="btn-secondary">Logout</button>
+                </div>
+            </nav>
+
+            <div class="content">
+                <div class="sidebar">
+                    <div class="upload-section">
+                        <label for="csvFile" class="upload-label">
+                            <span>Upload CSV</span>
+                            <small>Drag & drop or click to select</small>
+                        </label>
+                        <input type="file" id="csvFile" accept=".csv" class="hidden">
+                    </div>
+                    <div class="files-list">
+                        <h3>Your Files</h3>
+                        <div id="filesList"></div>
+                    </div>
+                </div>
+
+                <div class="main-content">
+                    <div id="analysisSection" class="analysis-section">
+                        <div class="no-file-selected">
+                            <h2>Select a file to analyze</h2>
+                            <p>Upload a new CSV file or select from your existing files</p>
+                        </div>
+                        
+                        <div id="fileAnalysis" class="file-analysis hidden">
+                            <div class="analysis-header">
+                                <h2 id="currentFileName"></h2>
+                                <div class="analysis-tabs">
+                                    <button class="analysis-tab active" data-tab="query">Query Data</button>
+                                    <button class="analysis-tab" data-tab="custom">Custom Analysis</button>
+                                </div>
+                            </div>
+
+                            <div id="querySection" class="query-section">
+                                <div class="query-builder">
+                                    <select id="fieldSelect"></select>
+                                    <select id="operatorSelect">
+                                        <option value=">">&gt;</option>
+                                        <option value="<">&lt;</option>
+                                        <option value="=">=</option>
+                                    </select>
+                                    <input type="text" id="valueInput" placeholder="Value">
+                                    <button id="runQueryBtn" class="btn-primary">Run Query</button>
+                                </div>
+                                
+                                <div class="results-section">
+                                    <div class="stats-grid" id="statsGrid"></div>
+                                    <div class="results-table" id="resultsTable"></div>
+                                </div>
+                            </div>
+
+                            <div id="customSection" class="custom-section hidden">
+                                <div class="custom-query">
+                                    <textarea id="customPrompt" placeholder="Describe your analysis needs..."></textarea>
+                                    <button id="runCustomBtn" class="btn-primary">Analyze</button>
+                                </div>
+                                <div id="customResults" class="custom-results"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div id="toast" class="toast"></div>
+    <script src="js/auth.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/components/jsonViewer.js"></script>
+    <script src="js/components/customAnalysis.js"></script>
+    <script src="js/components/dataTable.js"></script>
+</body>
+</html>
